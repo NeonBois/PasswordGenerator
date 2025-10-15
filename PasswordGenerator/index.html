@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Random Password Generator</title>
+
+<!-- Browser favicon -->
+<link rel="icon" type="image/png" href="Logo.png">
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .container {
+    background: #1e293b;
+    padding: 24px 28px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    width: 400px;
+    text-align: center;
+  }
+  h1 { color: #a78bfa; margin-bottom: 10px; }
+  label { display: block; margin: 8px 0; text-align: left; }
+  input[type="checkbox"] { transform: scale(1.2); margin-right: 6px; }
+  button {
+    margin-top: 14px; padding: 10px 16px;
+    background: #7c3aed; color: white;
+    border: none; border-radius: 6px;
+    cursor: pointer; font-weight: bold;
+    transition: 0.2s;
+  }
+  button:hover { background: #6d28d9; }
+  #password {
+    margin-top: 15px; padding: 10px;
+    background: #111827; border-radius: 6px;
+    font-family: monospace; color: #f9fafb;
+    word-break: break-all;
+  }
+  .strength { margin-top: 10px; height: 10px; border-radius: 9999px;
+    background: rgba(255,255,255,0.1); overflow: hidden; }
+  .strength-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #ef4444, #facc15, #22c55e); transition: width 0.3s ease; }
+  #lengthDisplay { color: #9ca3af; margin-top: 8px; font-size: 14px; }
+  .privacy { margin-top: 12px; font-size: 12px; color: #9ca3af; }
+  .privacy a { color: #7c3aed; text-decoration: none; }
+  .privacy a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔐 Password Generator</h1>
+    <label><input type="checkbox" id="upper" checked> Include Uppercase (A-Z)</label>
+    <label><input type="checkbox" id="lower" checked> Include Lowercase (a-z)</label>
+    <label><input type="checkbox" id="digits" checked> Include Digits (0-9)</label>
+    <label><input type="checkbox" id="symbols" checked> Include Symbols (*&^%$#@!)</label>
+    <button onclick="generatePassword()">Generate</button>
+    <button onclick="copyPassword()">Copy</button>
+    <div id="password">— Click Generate —</div>
+    <div id="lengthDisplay"></div>
+    <div class="strength"><div class="strength-bar" id="strength-bar"></div></div>
+    <p id="strength-text" style="color:#9ca3af; margin-top:6px;">Strength: —</p>
+
+    <!-- Privacy Policy opens same tab -->
+    <div class="privacy">
+      <a href="Ignore/privacy.html">Privacy Policy</a>
+    </div>
+  </div>
+
+<script>
+function generatePassword() {
+  const length = Math.floor(Math.random() * (25 - 15 + 1)) + 15;
+  const upper = document.getElementById("upper").checked;
+  const lower = document.getElementById("lower").checked;
+  const digits = document.getElementById("digits").checked;
+  const symbols = document.getElementById("symbols").checked;
+
+  const sets = [];
+  if (upper) sets.push("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+  if (lower) sets.push("abcdefghijklmnopqrstuvwxyz");
+  if (digits) sets.push("0123456789");
+  if (symbols) sets.push("*&^%$#@!~?");
+
+  if (sets.length === 0) {
+    document.getElementById("password").textContent = "Please enable at least one set.";
+    updateStrength("");
+    return;
+  }
+
+  let allChars = sets.join("");
+  let password = "";
+
+  const array = new Uint32Array(length);
+  crypto.getRandomValues(array);
+  for (let i = 0; i < length; i++) {
+    password += allChars[array[i] % allChars.length];
+  }
+
+  document.getElementById("password").textContent = password;
+  document.getElementById("lengthDisplay").textContent = `Length: ${length}`;
+  updateStrength(password);
+}
+
+function copyPassword() {
+  const pw = document.getElementById("password").textContent;
+  if (pw && pw !== "— Click Generate —") {
+    navigator.clipboard.writeText(pw).then(() => alert("Password copied to clipboard!"));
+  }
+}
+
+function updateStrength(password) {
+  const bar = document.getElementById("strength-bar");
+  const text = document.getElementById("strength-text");
+  if (!password) { bar.style.width = "0%"; text.textContent = "Strength: —"; return; }
+
+  let score = 0;
+  if (password.length >= 8) score++;
+  if (password.length >= 12) score++;
+  if (/[a-z]/.test(password)) score++;
+  if (/[A-Z]/.test(password)) score++;
+  if (/[0-9]/.test(password)) score++;
+  if (/[^A-Za-z0-9]/.test(password)) score++;
+
+  const percent = Math.min(100, (score / 6) * 100);
+  bar.style.width = percent + "%";
+
+  let label = "Weak";
+  if (percent >= 80) label = "Strong";
+  else if (percent >= 50) label = "Moderate";
+  text.textContent = "Strength: " + label;
+}
+</script>
+</body>
+</html>

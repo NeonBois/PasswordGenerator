@@ -1,93 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Privacy Policy - Password Generator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Privacy Policy - Password Generator</title>
+  <link rel="icon" type="image/png" href="../Logo.png"> <!-- ✅ Favicon line -->
 
-<!-- Browser favicon -->
-<link rel="icon" type="image/png" href="../Ignore/Logo.png">
-
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: #e5e7eb;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 40px 20px;
-  }
-  .container {
-    background: #1e293b;
-    padding: 24px 28px;
-    border-radius: 12px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.4);
-    max-width: 600px;
-    width: 100%;
-  }
-  h1 {
-    color: #a78bfa;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  h2 {
-    color: #fbbf24;
-    margin-top: 20px;
-  }
-  p {
-    margin: 10px 0;
-    line-height: 1.5;
-  }
-  footer {
-    margin-top: 24px;
-    text-align: center;
-    font-size: 12px;
-    color: #9ca3af;
-  }
-  .back-button {
-    display: block;
-    margin: 0 auto 20px auto;
-    padding: 10px 16px;
-    background: #7c3aed;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    width: 200px;
-    transition: 0.2s;
-  }
-  .back-button:hover {
-    background: #6d28d9;
-  }
-</style>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .container {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      width: 500px;
+    }
+    h1 {
+      color: #a78bfa;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #d1d5db;
+      line-height: 1.5;
+    }
+    a {
+      color: #7c3aed;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    button {
+      margin-top: 16px;
+      padding: 10px 18px;
+      background: #7c3aed;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #6d28d9;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <!-- Back button -->
-    <a href="../passwordgen.html" class="back-button">← Back to Generator</a>
-
-    <h1>Privacy Policy</h1>
-
-    <h2>1. Password Generation</h2>
-    <p>This Password Generator does <strong>NOT</strong> generate or access real people's passwords. 
-    All passwords are generated randomly using cryptographic-safe methods directly in your browser.</p>
-
-    <h2>2. Purpose</h2>
-    <p>The generator is intended to help users create strong, unique passwords for personal or testing use. 
-    It was created to encourage safe password practices and prevent reuse of weak or common passwords.</p>
-
-    <h2>3. Data Privacy</h2>
-    <p>No passwords or personal data are collected, stored, or transmitted anywhere. Everything happens locally in your browser.</p>
-
-    <h2>4. Usage Recommendation</h2>
-    <p>Use the generated passwords responsibly and store them securely. Consider using a password manager for safekeeping.</p>
-
-    <footer>© 2025 Password Generator. All rights reserved.</footer>
+    <h1>🔒 Privacy Policy</h1>
+    <p>
+      This Password Generator does <strong>NOT</strong> collect, store, or access any personal passwords.
+      All generated passwords are created locally on your device using secure random functions.
+    </p>
+    <p>
+      This tool was made to help users easily generate secure and unique passwords
+      for personal or professional use.
+    </p>
+    <p>
+      For questions or feedback, you can reach us at:
+      <strong>urlocalgenerator@gmail.com</strong>
+    </p>
+    <button onclick="window.location.href='../index.html'">Back to Password Generator</button>
   </div>
 </body>
 </html>
