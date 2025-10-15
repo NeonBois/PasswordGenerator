@@ -1,1 +1,1 @@
-REMINDER: THIS IS NOT HARMFUL IN ANY WAY
+idk lol. just generate random passwords i guess
